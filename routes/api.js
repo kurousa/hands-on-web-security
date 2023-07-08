@@ -2,11 +2,19 @@ const express = require('express');
 const router = express.Router();
 
 router.get("/", (req,res) => {
+    // response current server timestamp via X-Timestamp
+    res.setHeader("X-Timestamp", Date.now());
     let message = req.query.message;
+    const lang = req.headers["x-lang"];
+    console.log(`lang=${lang}`);
 
     if (message === "") {
         res.status(400);
-        message = "messageの値が空です。"
+        if (lang === "en"){
+            message = "message is empty."
+        } else {
+            message = "messageの値が空です。"
+        }
     }
     res.send({message});
 });
