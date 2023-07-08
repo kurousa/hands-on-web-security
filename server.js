@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+// specify destination of static files.
+app.use(express.static("public"));
+
 app.get("/", (req, res, next) => {
     res.end("Top Page");
 });
